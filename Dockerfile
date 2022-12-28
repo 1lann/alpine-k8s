@@ -34,7 +34,7 @@ RUN curl -sLO https://storage.googleapis.com/kubernetes-release/release/v${KUBEC
     chmod +x /usr/bin/kubectl
 
 # Install kustomize (latest release)
-RUN curl -sLO https://github.com/kubernetes-sigs/kustomize/release s/download/kustomize%2F${KUSTOMIZE_VERSION}/kustomize_${KUSTOMIZE_VERSION}_linux_${TARGETARCH}.tar.gz && \
+RUN curl -sLO https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F${KUSTOMIZE_VERSION}/kustomize_${KUSTOMIZE_VERSION}_linux_${TARGETARCH}.tar.gz && \
     tar xvzf kustomize_${KUSTOMIZE_VERSION}_linux_${TARGETARCH}.tar.gz && \
     mv kustomize /usr/bin/kustomize && \
     chmod +x /usr/bin/kustomize
