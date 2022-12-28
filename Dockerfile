@@ -1,3 +1,5 @@
+FROM busybox:stable-musl AS sh-static
+
 FROM alpine:3.17
 
 # Ignore to update versions here
@@ -32,7 +34,7 @@ RUN curl -sLO https://storage.googleapis.com/kubernetes-release/release/v${KUBEC
     chmod +x /usr/bin/kubectl
 
 # Install kustomize (latest release)
-RUN curl -sLO https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F${KUSTOMIZE_VERSION}/kustomize_${KUSTOMIZE_VERSION}_linux_${TARGETARCH}.tar.gz && \
+RUN curl -sLO https://github.com/kubernetes-sigs/kustomize/release s/download/kustomize%2F${KUSTOMIZE_VERSION}/kustomize_${KUSTOMIZE_VERSION}_linux_${TARGETARCH}.tar.gz && \
     tar xvzf kustomize_${KUSTOMIZE_VERSION}_linux_${TARGETARCH}.tar.gz && \
     mv kustomize /usr/bin/kustomize && \
     chmod +x /usr/bin/kustomize
@@ -64,5 +66,9 @@ RUN apk add --update --no-cache gettext
 # Install kubeseal
 RUN curl -L https://github.com/bitnami-labs/sealed-secrets/releases/download/v${KUBESEAL_VERSION}/kubeseal-${KUBESEAL_VERSION}-linux-${TARGETARCH}.tar.gz -o - | tar xz -C /usr/bin/ && \
     chmod +x /usr/bin/kubeseal
+
+RUN rm /bin/sh
+
+COPY --from=sh-static /bin/sh /bin/sh
 
 WORKDIR /apps
