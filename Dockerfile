@@ -20,8 +20,8 @@ RUN apk add --update --no-cache curl ca-certificates bash git && \
 # add helm-diff
 RUN helm plugin install https://github.com/databus23/helm-diff && rm -rf /tmp/helm-*
 
-# add helm-unittest
-RUN helm plugin install https://github.com/quintush/helm-unittest && rm -rf /tmp/helm-*
+# # add helm-unittest
+# RUN helm plugin install https://github.com/quintush/helm-unittest && rm -rf /tmp/helm-*
 
 # add helm-push
 RUN helm plugin install https://github.com/chartmuseum/helm-push && rm -rf /tmp/helm-*
